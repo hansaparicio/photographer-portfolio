@@ -1,11 +1,11 @@
-import './App.css';
+import './Portfolio.css';
 import Gallery from "react-photo-gallery";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Header} from "./features/Header";
 import logo from "./logo.svg";
 import {getPhotographerName, RandomInteger} from "./utils/utils";
 
-function App() {
+function Portfolio() {
   const [photos, setPhotos] = useState([]);
   const [photographerName] = useState(getPhotographerName());
 
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default Portfolio;
