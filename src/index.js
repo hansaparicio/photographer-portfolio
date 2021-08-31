@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Portfolio from './Portfolio';
+import Portfolio from './pages/Portfolio';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import AdminDashboard from "./AdminDashboard";
+import Dashboard from "./pages/Dashboard";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +14,7 @@ ReactDOM.render(
           <Portfolio/>
         </Route>
         <Route path="/admin">
-          <AdminDashboard />
+          <Dashboard />
         </Route>
       </Switch>
     </Router>

@@ -1,11 +1,11 @@
 import './Portfolio.css';
 import Gallery from "react-photo-gallery";
 import React, {useEffect, useMemo, useState} from "react";
-import { Header } from "./features/Header";
-import logo from "./logo.svg";
-import {getPhotographerName} from "./utils/utils";
-import "./ListAllFiles";
-import getPhotoList from "./ListAllFiles";
+import { Header } from "../features/Header";
+import logo from "../logo.svg";
+import {getPhotographerName} from "../utils/utils";
+import "../utils/ListAllFiles";
+import getPhotoList from "../utils/ListAllFiles";
 
 function Portfolio() {
   const [photos, setPhotos] = useState([]);

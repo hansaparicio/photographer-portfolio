@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import { Uppy } from "@uppy/core";
-import {Dashboard, useUppy} from '@uppy/react'
+import {Dashboard as UploaderDashboard, useUppy} from '@uppy/react'
 import '@uppy/core/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
-import {storage} from "./Firebase";
-import FirebaseCloudStorage from "./FirebaseCloudStorage";
+import {storage} from "../utils/Firebase";
+import FirebaseCloudStorage from "../utils/FirebaseCloudStorage";
 import { ref } from "firebase/storage";
 
 
-export default function AdminDashboard() {
+export default function Uploader() {
 
   const uppy = useUppy(() => {
     const storageRef = ref(storage);
@@ -21,11 +21,8 @@ export default function AdminDashboard() {
   }, [uppy])
 
   return (
-    <div>
-      <h1>Portfolio Dashboard</h1>
-      <Dashboard
+      <UploaderDashboard
         uppy={uppy}
       />
-    </div>
     );
 }
