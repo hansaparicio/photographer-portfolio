@@ -1,25 +1,41 @@
 import './Portfolio.css';
 import Gallery from "react-photo-gallery";
-import React, {useEffect, useState} from "react";
-import {Header} from "./features/Header";
+import React, {useEffect, useMemo, useState} from "react";
+import { Header } from "./features/Header";
 import logo from "./logo.svg";
-import {getPhotographerName, RandomInteger} from "./utils/utils";
+import {getPhotographerName} from "./utils/utils";
+import "./ListAllFiles";
+import getPhotoList from "./ListAllFiles";
 
 function Portfolio() {
   const [photos, setPhotos] = useState([]);
   const [photographerName] = useState(getPhotographerName());
 
-  const getRandomPhotos = photoCount => [...Array(photoCount).keys()].map(_ => {
-    const [width, height] = [RandomInteger(400, 300), RandomInteger(400, 100)];
-    const src = `https://source.unsplash.com/${width}x${height}/?portrait`
-    return {width, height, src};
-  });
+  const getPhotos = useMemo(() => async () => {
+    const sourceList = await getPhotoList();
+    const galleryItems = sourceList.map(async src => {
+      return await getImageSize(src);
+    })
+    return Promise.all([...galleryItems]);
+  }, [])
 
   useEffect(() => {
-    const photoCount = 20;
-    const newPhotos = getRandomPhotos(photoCount)
-    setPhotos(newPhotos);
-  }, []);
+    const fetchPhotos = async () => {
+      const newPhotos = await getPhotos()
+      setPhotos(newPhotos);
+    }
+    fetchPhotos();
+  }, [getPhotos]);
+
+  function getImageSize(src){
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = function(){
+        resolve({ width: this.width, height: this.height, src})
+      };
+      img.src = src;
+    })
+  }
 
   return (
     <div className="App">
