@@ -26,3 +26,7 @@
     border: none;
     height: 5vh;
 }
+
+.social-icon {
+    filter: invert(1);
+}
